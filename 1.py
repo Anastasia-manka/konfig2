@@ -44,7 +44,8 @@ def save_graph(dot, output_path):
 
 def main():
     config = load_config('config.yaml')
-    after_date = datetime.datetime.fromisoformat(config['commit_date'])
+    after_date = datetime.datetime.fromisoformat(config['commit_date']).replace(tzinfo=None)
+    #after_date = datetime.datetime.fromisoformat(config['commit_date'])
     
     commits = get_commits(config['repository_path'], after_date)
     

@@ -1,4 +1,4 @@
 visualizer_path: "/path/to/your/visualizer"  # Можно оставить, если не используется
-repository_path: "/Users/username/my_project" # Путь к вашему репозиторию
+repository_path: "C:/Users/Nataliya/PycharmProjects/pythonProject2" # Путь к вашему репозиторию
 output_image_path: "/Users/username/my_project/dependency_graph" # Путь к выходному изображению
 commit_date: "2024-12-11"                     # Дата коммитов
