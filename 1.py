@@ -10,6 +10,7 @@ def load_config(config_path):
         config = yaml.safe_load(file)
     return config
 
+
 def get_commits(repo_path, after_date):
     os.chdir(repo_path)
     result = subprocess.run(
@@ -17,11 +18,11 @@ def get_commits(repo_path, after_date):
         capture_output=True,
         text=True
     )
-    
+
     commits = []
     for line in result.stdout.splitlines():
         hash_value, date = line.split(' ', 1)
-        commit_date = datetime.datetime.fromisoformat(date)
+        commit_date = datetime.datetime.fromisoformat(date).replace(tzinfo=None)  # Исправлено
         if commit_date > after_date:
             commits.append(hash_value)
     return commits
