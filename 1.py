@@ -70,7 +70,10 @@ def main():
     print("Mermaid graph description saved to graph.mmd.")
 
     # Используем Mermaid CLI для генерации изображения
-    subprocess.run(['mmdc', '-i', 'graph.mmd', '-o', config['output_image_path']])
+    subprocess.run(['\\Program Files\\nodejs\\npx.cmd', 'mmdc', '-i', 'graph.mmd', '-o', config['output_image_path']])
+    #subprocess.run(
+    #    ['C:\\Program Files\\nodejs\\node.exe', 'C:\\Users\\Nataliya\\AppData\\Roaming\\npm\\mmdc', '-i', 'graph.mmd',
+    #     '-o', config['output_image_path']])
 
     print(f"Graph saved successfully to {config['output_image_path']}.")
 
