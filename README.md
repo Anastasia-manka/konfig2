@@ -78,6 +78,10 @@ test_save_graph: Проверяет, что функция save_graph корре
 
 ## Описание тестирования
 
+![image](https://github.com/user-attachments/assets/67035932-3560-446b-b088-167dbbe6f684)
+
+Граф успешно сохраняется.
+
 ![image](https://github.com/user-attachments/assets/4743ee2c-46fa-42c0-b7dd-009947e13295)
 
 
