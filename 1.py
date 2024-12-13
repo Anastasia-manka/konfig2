@@ -32,21 +32,23 @@ def get_commits(repo_path, after_date):
             commits.append(hash_value)
     return commits
 
-def build_graph(commits):
-    dot = graphviz.Digraph(comment='Git Commit Dependencies')
-    
-    for commit in commits:
-        dot.node(commit)
-        # Здесь можно добавить логику для добавления зависимостей между коммитами
-        # Например, если есть информация о родительских коммитах
-        # parents = get_parents(commit)
-        # for parent in parents:
-        #     dot.edge(parent, commit)
-    
-    return dot
 
-def save_graph(dot, output_path):
-    dot.render(output_path, format='png', cleanup=True)
+def build_mermaid_graph(commits):
+    mermaid_graph = "graph TD;\n"
+
+    for commit in commits:
+        mermaid_graph += f"    {commit};\n"  # Добавляем узел
+
+        # Получаем родительские коммиты
+        parents = get_parents(commit)
+        for parent in parents:
+            mermaid_graph += f"    {parent} --> {commit};\n"  # Добавляем ребро
+
+    return mermaid_graph
+
+def save_mermaid_graph(mermaid_graph, output_path):
+    with open(output_path, 'w') as file:
+        file.write(mermaid_graph)
 
 
 import zoneinfo
