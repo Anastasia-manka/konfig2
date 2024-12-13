@@ -56,8 +56,7 @@ import zoneinfo
 
 def main():
     config = load_config('config.yaml')
-    timezone = zoneinfo.ZoneInfo("Europe/Moscow")  # Укажите часовой пояс
-    after_date = datetime.datetime.fromisoformat(config['commit_date']).replace(tzinfo=timezone)
+    after_date = datetime.datetime.fromisoformat(config['commit_date']).replace(tzinfo=None)
 
     commits = get_commits(config['repository_path'], after_date)
 
@@ -65,8 +64,13 @@ def main():
         print("No commits found after the specified date.")
         return
 
-    graph = build_graph(commits)
-    save_graph(graph, config['output_image_path'])
+    mermaid_graph = build_mermaid_graph(commits)
+    save_mermaid_graph(mermaid_graph, 'graph.mmd')  # Сохраняем описание графа
+
+    print("Mermaid graph description saved to graph.mmd.")
+
+    # Используем Mermaid CLI для генерации изображения
+    subprocess.run(['mmdc', '-i', 'graph.mmd', '-o', config['output_image_path']])
 
     print(f"Graph saved successfully to {config['output_image_path']}.")
 
