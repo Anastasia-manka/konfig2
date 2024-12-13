@@ -1,4 +1,4 @@
 visualizer_path: "C:/Program Files/Graphviz/bin/dot.exe"  # Можно оставить, если не используется
 repository_path: "C:/Users/Nataliya/PycharmProjects/pythonProject2" # Путь к вашему репозиторию
 output_image_path: "C:/Users/Nataliya/output/graph.png" # Путь к выходному изображению
-commit_date: "2023-01-01T12:00:00+03:00"                     # Дата коммитов
+commit_date: "2023-01-01T12:00:00"                     # Дата коммитов

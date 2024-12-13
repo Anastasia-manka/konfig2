@@ -3,17 +3,12 @@ import os
 import subprocess
 import yaml
 import datetime
-import graphviz
-
+import zoneinfo
 
 def load_config(config_path):
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
     return config
-
-
-import zoneinfo
-
 
 def get_commits(repo_path, after_date):
     os.chdir(repo_path)
@@ -32,6 +27,14 @@ def get_commits(repo_path, after_date):
             commits.append(hash_value)
     return commits
 
+def get_parents(commit):
+    result = subprocess.run(
+        ['git', 'rev-list', '--parents', '-n', '1', commit],
+        capture_output=True,
+        text=True
+    )
+    parents = result.stdout.strip().split()[1:]  # Первый элемент — сам коммит, остальные — родители
+    return parents
 
 def build_mermaid_graph(commits):
     mermaid_graph = "graph TD;\n"
@@ -50,13 +53,10 @@ def save_mermaid_graph(mermaid_graph, output_path):
     with open(output_path, 'w') as file:
         file.write(mermaid_graph)
 
-
-import zoneinfo
-
-
 def main():
     config = load_config('config.yaml')
-    after_date = datetime.datetime.fromisoformat(config['commit_date']).replace(tzinfo=None)
+    timezone = zoneinfo.ZoneInfo("Europe/Moscow")  # Укажите часовой пояс
+    after_date = datetime.datetime.fromisoformat(config['commit_date']).replace(tzinfo=timezone)
 
     commits = get_commits(config['repository_path'], after_date)
 
