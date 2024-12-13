@@ -91,5 +91,5 @@ test_save_graph: Проверяет, что функция save_graph корре
 
 ![image](https://github.com/user-attachments/assets/0ac836de-30cd-45a7-bbf5-45852cc461ee)
 
-
+png фото зависимостей в графе
 
